@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-CXrgMc3u.js";import{v as r}from"./index-BhrhJ0Ym.js";import{g as e}from"./utils-zXAG3DOG.js";import"./index-B30QhG-o.js";import"./index-B57Z1m4t.js";const n=()=>[{title:e("Markets")}];function p(){return t.jsx(r,{})}export{p as default,n as meta};

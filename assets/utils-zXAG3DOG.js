@@ -1,0 +1,1 @@
+function s(e,t="Orderly"){return`${e} | ${t}`}function c(e,t="base-type"){const r=e.split("_"),a=r[0],n=r[1],o=r[2];return t.replace("type",a).replace("base",n).replace("quote",o)}export{c as f,s as g};

@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime-CXrgMc3u.js";import{g as t}from"./index-B1V1iHJO.js";import{g as r}from"./utils-zXAG3DOG.js";import"./index-B30QhG-o.js";import"./index-B57Z1m4t.js";import"./index-FUobFp-t.js";import"./index-B8pojRXq.js";import"./index-qjQQpfQN.js";const f=()=>[{title:r("Fee tier")}];function u(){return e.jsx(t.FeeTierPage,{})}export{u as default,f as meta};

@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-CXrgMc3u.js";import{a as o}from"./index-B1V1iHJO.js";import{g as r}from"./utils-zXAG3DOG.js";import"./index-B30QhG-o.js";import"./index-B57Z1m4t.js";import"./index-FUobFp-t.js";import"./index-B8pojRXq.js";import"./index-qjQQpfQN.js";const g=()=>[{title:r("Portfolio")}];function l(){return t.jsx(o.OverviewPage,{})}export{l as default,g as meta};
