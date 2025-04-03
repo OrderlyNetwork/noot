@@ -25,6 +25,7 @@ const config: OrderlyConfig = {
         { name: "Trading", href: "/" },
         { name: "Portfolio", href: "/portfolio" },
         { name: "Markets", href: "/markets" },
+        { name: "Website ↗", href: "https://nootonabstract.xyz/", target: "_blank" },
       ],
       campaigns: {
         name: "Reward",
