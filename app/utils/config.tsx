@@ -86,10 +86,6 @@ const config: OrderlyConfig = {
       profitColor: "rgba(41, 223, 169, 1)",
       lossColor: "rgba(245, 97, 139, 1)",
       brandColor: "rgba(255, 255, 255, 0.98)",
-
-      // ref
-      refLink: "https://orderly.network",
-      refSlogan: "Orderly referral",
     },
   },
 };

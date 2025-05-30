@@ -12,7 +12,14 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader: LoaderFunction = () => {
-  return redirect(`/perp/${DEFAULT_SYMBOL}`);
+export const loader: LoaderFunction = ({ request }) => {
+  // Extract search parameters from the request URL
+  const url = new URL(request.url);
+  const searchParamsString = url.search;
+  
+  // Construct the redirect URL with search parameters
+  const queryString = searchParamsString || "";
+  
+  return redirect(`/perp/${DEFAULT_SYMBOL}${queryString}`);
 };
 
