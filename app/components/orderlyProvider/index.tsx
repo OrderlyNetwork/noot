@@ -1,14 +1,12 @@
 import { FC, ReactNode, useCallback } from "react";
-import { WalletConnectorProvider } from "@orderly.network/wallet-connector";
 import { OrderlyAppProvider } from "@orderly.network/react-app";
+import { WalletConnectorPrivyProvider, Network } from '@orderly.network/wallet-connector-privy';
 import config from "@/utils/config";
 import { NetworkId } from "@orderly.network/types";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import injected from "@web3-onboard/injected-wallets";
-import walletConnect from '@web3-onboard/walletconnect'
-import binance from "@binance/w3w-blocknative-connector";
+import { QueryClient } from "@tanstack/query-core";
 
 const OrderlyProvider: FC<{ children: ReactNode }> = (props) => {
+  const appId = import.meta.env.VITE_PRIVY_APP_ID;
 	const networkId = import.meta.env.VITE_NETWORK_ID as NetworkId;
   const onChainChanged = useCallback(
 		(_chainId: number, {isTestnet}: {isTestnet: boolean}) => {
@@ -26,34 +24,37 @@ const OrderlyProvider: FC<{ children: ReactNode }> = (props) => {
   );
   
   return (
-    <WalletConnectorProvider
-      solanaInitial={{network: networkId === 'mainnet' ? WalletAdapterNetwork.Mainnet : WalletAdapterNetwork.Devnet}}
-      evmInitial={import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID && typeof window !== 'undefined' ? {
-        options: {
-          wallets: [
-            injected(),
-            binance({ options: { lng: "en" } }),
-            walletConnect({
-              projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
-              qrModalOptions: {
-                themeMode: "dark",
-              },
-              dappUrl: window.location.origin,
-            }),
-          ],
-        }
-      } : undefined}
+
+    <WalletConnectorPrivyProvider
+      network={networkId === 'mainnet' ? Network.mainnet : Network.testnet}
+      abstractConfig={{
+        queryClient: new QueryClient(),
+      }}
+      privyConfig={{
+        config: {
+          appearance: {
+            showWalletLoginFirst: false,
+          },
+        },
+        appid: appId,
+      }}
     >
-      <OrderlyAppProvider
-        brokerId={import.meta.env.VITE_ORDERLY_BROKER_ID}
-        brokerName={import.meta.env.VITE_ORDERLY_BROKER_NAME}
-        networkId={networkId}
-        onChainChanged={onChainChanged}
-        appIcons={config.orderlyAppProvider.appIcons}
-      >
-        {props.children}
-      </OrderlyAppProvider>
-    </WalletConnectorProvider>
+    <OrderlyAppProvider
+      brokerId={import.meta.env.VITE_ORDERLY_BROKER_ID}
+      brokerName={import.meta.env.VITE_ORDERLY_BROKER_NAME}
+      networkId={networkId}
+      onChainChanged={onChainChanged}
+      appIcons={config.orderlyAppProvider.appIcons}
+      chainFilter={{
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        mainnet: [{id: 2741} as any],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        testnet: [{id: 11124} as any],
+      }}
+    >
+      {props.children}
+    </OrderlyAppProvider>
+    </WalletConnectorPrivyProvider>
   );
 };
 
