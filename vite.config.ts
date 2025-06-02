@@ -6,7 +6,11 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig(() => {
   const isProduction = process.env.NODE_ENV === "production";
-  const noExternal = [/^@orderly.*$/, "@uiw/react-split"];
+  const noExternal = [
+    /^@orderly.*$/,
+    "@uiw/react-split",
+    "@layerzerolabs/lz-solana-sdk-v2",
+  ];
   if (isProduction) {
     noExternal.push("ethers");
   }
