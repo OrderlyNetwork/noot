@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { cjsInterop } from "vite-plugin-cjs-interop";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
+import { vercelPreset } from "@vercel/remix/vite";
 
 export default defineConfig(() => {
   const isProduction = process.env.NODE_ENV === "production";
@@ -14,10 +15,10 @@ export default defineConfig(() => {
   return {
     ssr: {
       noExternal,
-      external: ["@layerzerolabs/lz-solana-sdk-v2"],
     },
     plugins: [
       remix({
+        presets: [vercelPreset()],
         ssr: true,
         future: {
           v3_fetcherPersist: true,
